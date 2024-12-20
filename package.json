@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.1.1",
     "@supabase/supabase-js": "^2.47.10",
     "@tabler/icons-react": "^3.26.0",
+    "base64-arraybuffer": "^1.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
@@ -27,6 +28,7 @@
     "react-hook-form": "^7.54.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.19.0",
+    "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.1"

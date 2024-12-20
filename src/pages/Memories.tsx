@@ -1,6 +1,4 @@
 import MemoriesForm from '@/components/memories/memoriesform'
-import { Button } from '@/components/ui/button'
-import React from 'react'
 
 export default function Memories() {
   return (

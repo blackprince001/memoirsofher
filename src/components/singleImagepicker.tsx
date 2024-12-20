@@ -5,7 +5,7 @@ import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 import { Card } from "@/components/ui/card";
 import { ControllerRenderProps, FieldError } from "react-hook-form";
-import { Memory } from "@/lib/schemas";
+import { Memory, MemoryForm } from "@/lib/schemas";
 
 
 const mainVariant = {
@@ -24,7 +24,7 @@ export const SingleFileInput = ({
   error
 }: {
   onChange?: (file: File | null, base64?: string | null) => void;
-  field: ControllerRenderProps<Memory, "imageUrl">;
+  field: ControllerRenderProps<MemoryForm, "imageFile">;
   error?: FieldError;
 }) => {
   const [file, setFile] = useState<File | null>(null);
@@ -32,11 +32,6 @@ export const SingleFileInput = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
  
-  useEffect(() => {
-    if (field.value && !base64) {
-      setBase64(field.value);
-    }
-  }, [field.value]);
 
   const handleFileChange = (newFiles: File[]) => {
     const selectedFile = newFiles[0] || null;
