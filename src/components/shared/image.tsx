@@ -3,6 +3,8 @@ import { cn } from "../../utils";
 
 interface IProps {
   skeletonclassname?: string;
+  height?: number
+  
 }
 const CustomImage = (
   props: IProps & React.ImgHTMLAttributes<HTMLImageElement>
@@ -17,10 +19,14 @@ const CustomImage = (
       />
       {!loaded && (
         <div
+        style={{ 
+          height: `${props.height}px`
+        }}
           className={cn(
-            "bg-gray-200 animate-pulse",
+            "bg-gray-200 animate-pulse ",
+
             props.className as string,
-            props.skeletonclassname as string
+            // props.skeletonclassname as string
           )}
         ></div>
       )}

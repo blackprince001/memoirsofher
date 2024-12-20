@@ -243,7 +243,6 @@ const fields = [
       "Friends",
       "Colleague",
       "Other",
-
     ],
     id: "tags",
     placeholder: "e.g. KNUST",

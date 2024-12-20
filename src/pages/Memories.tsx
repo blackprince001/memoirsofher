@@ -14,7 +14,8 @@ const MemoriesPage = () => {
 
     const { data: Memories, error } = await supabaseClient
       .from("memory")
-      .select();
+      .select()
+      .order("created_at", { ascending: false });
 
     if (data && !error) {
       setLoading(false);
