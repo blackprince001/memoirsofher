@@ -28,7 +28,7 @@ export const ParallaxScroll = ({
 
   return (
     <div className={cn("h-full items-start w-full", className)} ref={gridRef}>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 items-start w-full mx-auto gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 items-start w-full mx-auto gap-10">
         {cards.map((cardData, idx) => (
           <motion.div 
             className="grid gap-10 relative" 
