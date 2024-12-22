@@ -66,7 +66,7 @@ const MemoryModal = ({ isOpen, onClose, memory }: MemoryModalProps) => {
               </div>
               <div className="p-6 md:p-8">
                 <div className="mb-6">
-                  <h2 className="text-2xl md:text-3xl font-medium mb-2">{memory.title}</h2>
+                  <h2 className="text-2xl md:text-3xl font-medium mb-2 break-all">{memory.title}</h2>
                   <p className="text-sm md:text-base text-black/50">
                     Shared by {memory.author || "Anonymous"}
                   </p>

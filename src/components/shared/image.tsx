@@ -1,5 +1,6 @@
+import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { cn } from "../../utils";
+
 import React from "react";
 
 interface IProps {
