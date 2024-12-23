@@ -121,7 +121,7 @@ const MemoryModal = ({ isOpen, onClose, memory }: MemoryModalProps) => {
                     </p>
                   </div>
                   <div className="overflow-y-auto">
-                    <p className="text-lg leading-relaxed mb-8 whitespace-pre-wrap break-all">
+                    <p className="text-lg leading-relaxed mb-8 whitespace-pre-wrap break-words">
                       {memory.message}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -161,7 +161,7 @@ const MemoryModal = ({ isOpen, onClose, memory }: MemoryModalProps) => {
                   <div
                     style={{ maxHeight: "calc(100% - 60px)", overflowY: "auto" }}
                   >
-                    <p className="text-base leading-normal mb-6 whitespace-pre-wrap break-all">
+                    <p className="text-base leading-normal mb-6 whitespace-pre-wrap break-words">
                       {memory.message}
                     </p>
                     <div className="flex flex-wrap gap-2">
