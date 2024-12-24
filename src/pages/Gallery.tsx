@@ -15,6 +15,8 @@ const Gallery = () => {
   const [hasMore, setHasMore] = useState<boolean>(true);
   
   const loader = useRef<HTMLDivElement | null>(null);
+  const BATCH_SIZE = 30; // Increased from 15
+  const PREFETCH_THRESHOLD = 0.5;
 
   const fetchAllGalleryImages = useCallback(async (page: number) => {
     if (page === 1) {
@@ -24,15 +26,29 @@ const Gallery = () => {
     }
 
     try {
+      // Try to get from cache first
+      const cached = sessionStorage.getItem(`gallery-page-${page}`);
+      if (cached) {
+        setData(prev => [...prev, ...JSON.parse(cached)]);
+        return;
+      }
+
       const { data: Images, error } = await supabaseClient
         .from("gallery")
         .select()
         .order("created_at", { ascending: false })
-        .range((page - 1) * 15, page * 15 - 1);
+        .range((page - 1) * BATCH_SIZE, page * BATCH_SIZE - 1);
 
       if (!error) {
-        setData(prev => [...prev, ...(Images as GalleryData[])]);
-        if (Images.length < 15) setHasMore(false);
+        setData(prev => {
+          const newData = [...prev, ...(Images as GalleryData[])];
+          // Prefetch next batch
+          if (Images.length === BATCH_SIZE) {
+            prefetchNextBatch(page + 1);
+          }
+          return newData;
+        });
+        if (Images.length < BATCH_SIZE) setHasMore(false);
       }
     } finally {
       if (page === 1) {
@@ -42,6 +58,18 @@ const Gallery = () => {
       }
     }
   }, []);
+
+  const prefetchNextBatch = async (nextPage: number) => {
+    const { data: nextBatch } = await supabaseClient
+      .from("gallery")
+      .select()
+      .order("created_at", { ascending: false })
+      .range(nextPage * BATCH_SIZE, (nextPage + 1) * BATCH_SIZE - 1);
+      
+    if (nextBatch) {
+      sessionStorage.setItem(`gallery-page-${nextPage}`, JSON.stringify(nextBatch));
+    }
+  };
 
   const loadMore = useCallback(() => {
     if (hasMore && !loading && !isLoadingMore) {
@@ -64,8 +92,8 @@ const Gallery = () => {
       },
       {
         root: null,
-        rootMargin: "20px",
-        threshold: 1.0,
+        rootMargin: "150px", // Increased for earlier loading
+        threshold: PREFETCH_THRESHOLD,
       }
     );
 
