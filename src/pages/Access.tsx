@@ -16,12 +16,14 @@ interface Memory {
   tags: string;
   imgUrl: string;
   showInGallery: boolean;
+  isDeleted: boolean;
 }
 
 interface GalleryItem {
   id: number;
   created_at: string;
   imgUrl: string;
+  isDeleted: boolean;
 }
 
 const ACCESS_CODE = variable.access_code;
@@ -114,7 +116,7 @@ const AccessPage = () => {
       // Delete from database
       const { error: dbError } = await supabaseClient
         .from(type)
-        .delete()
+        .update({ isDeleted: true })
         .eq("id", id);
 
       if (dbError) throw dbError;
